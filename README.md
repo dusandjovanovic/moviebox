@@ -3,6 +3,12 @@ Universal Windows Application for getting and storing movie and series metadata.
 
 MovieBox  je aplikacija koji omogućava organizovanje i lako održavanje kolekcije filmova. Održavanje kolekcije podrazumeva dodavanje, modifikaciju i brisanje filmova. Pored filmova postoji i pregled sezona serija. MovieBox omogućava nalaženje odredjenog filma iz kolekcije i reprodukciju sadržaja ukoliko je taj konkretan film prisutan na fajlsistemu korisnika. Pored održavanje biblioteke MovieBox pruža i pribavljanje preporučenih filmova, formiranih na osnovu trenutnog sadržaja biblioteke.
 
+
+![alt text][main]
+
+[main]: metadata/movies.PNG
+
+
 ### Graph baza Neo4j
 Za održavanje perzistencije koristi se neo4j baza podataka u koju se preslikava model podataka prisutan u samoj logici aplikacije.
 Neophodno je pokrenuti neo4j runtime iz foldera **neo4j/bin/** komandom `neo4j console`. Ne treba zatvarati konekciju prilikom korišćenja aplikacije.
