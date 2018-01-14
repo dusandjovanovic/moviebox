@@ -1,0 +1,50 @@
+﻿<ContentDialog
+    x:Class="MovieBox.SearchQuery"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MovieBox"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="Search query"
+    PrimaryButtonText="Done"
+    SecondaryButtonText="Play"
+    PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
+    SecondaryButtonClick="ContentDialog_SecondaryButtonClick">
+
+    <Grid>
+        <ScrollViewer>
+            <RelativePanel>
+                <TextBlock Name="txtTitle" Style="{StaticResource HeaderTextBlockStyle}" HorizontalAlignment="Center" RelativePanel.RightOf="imgPoster"/>
+                <Image Name="imgPoster" Margin="5,5,15,5" Stretch="UniformToFill" MaxWidth="250" HorizontalAlignment="Center" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignLeftWithPanel="True" />
+                <TextBlock Name="txtGenres" Foreground="{ThemeResource SystemAccentColor}" Style="{StaticResource SubheaderTextBlockStyle}" RelativePanel.Below="txtTitle" RelativePanel.RightOf="imgPoster"/>
+                <TextBlock Name="txtYear" Style="{StaticResource SubheaderTextBlockStyle}" RelativePanel.Below="txtGenres" RelativePanel.RightOf="imgPoster" />
+
+                <StackPanel Orientation="Vertical" Margin="5,5,5,5" RelativePanel.Below="imgPoster">
+                    <RelativePanel Margin="2,5,2,5">
+                        <TextBlock Name="holderDirectors" FontWeight="Bold" Text="Directors: " RelativePanel.AlignLeftWithPanel="True" Margin="0,0,5,0"/>
+                        <TextBlock Name="txtDirectors" RelativePanel.RightOf="holderDirectors" />
+                    </RelativePanel>
+
+                    <RelativePanel Margin="2,5,2,5">
+                        <TextBlock Name="holderWriters" FontWeight="Bold" Text="Writers: " RelativePanel.AlignLeftWithPanel="True" Margin="0,0,5,0"/>
+                        <TextBlock Name="txtWriters" RelativePanel.RightOf="holderWriters" />
+                    </RelativePanel>
+
+                    <RelativePanel Margin="2,5,2,5">
+                        <TextBlock Name="holderActors" FontWeight="Bold" Text="Actors: " RelativePanel.AlignLeftWithPanel="True" Margin="0,0,5,0"/>
+                        <TextBlock Name="txtActors" RelativePanel.RightOf="holderActors" />
+                    </RelativePanel>
+
+                    <RelativePanel Margin="2,5,2,5">
+                        <TextBlock Name="txtPlot" Style="{StaticResource CaptionTextBlockStyle}" TextWrapping="Wrap" MaxLines="5" RelativePanel.AlignHorizontalCenterWithPanel="True" />
+                    </RelativePanel>
+
+                    <RelativePanel Margin="2,5,2,5">
+                        <TextBlock Name="txtPath" FontSize="15" Style="{StaticResource CaptionTextBlockStyle}" RelativePanel.AlignHorizontalCenterWithPanel="True" />
+                    </RelativePanel>
+                </StackPanel>
+            </RelativePanel>
+        </ScrollViewer>
+    </Grid>
+</ContentDialog>

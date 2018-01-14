@@ -1,0 +1,351 @@
+﻿<Page
+    x:Class="MovieBox.MoviesPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MovieBox"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:local1="using:MovieBox.NeoModels"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <DataTemplate x:DataType="local1:Movie" x:Key="PhotosTemplate">
+            <Grid MaxWidth="200"
+                Background="White"
+                BorderBrush="Black"
+                BorderThickness="1"
+                Margin="5,5,5,5"
+                >
+                <Image
+                    Source="{x:Bind Poster}"
+                    Stretch="UniformToFill"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"/>
+                <RelativePanel Background="Black" Opacity="0.8" Height="Auto" VerticalAlignment="Bottom" HorizontalAlignment="Stretch">
+                    <TextBlock Text="{x:Bind Title}" FontSize="14" Foreground="White" Margin="8,6,8,8" RelativePanel.AlignVerticalCenterWithPanel="True" RelativePanel.AlignHorizontalCenterWithPanel="True"  TextWrapping="Wrap" TextAlignment="Center"></TextBlock>
+                </RelativePanel>
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="VisualStateGroup">
+                <VisualState x:Name="WideLayout">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="900" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="GenresComboBox.Visibility" Value="Visible" />
+                        <Setter Target="DirectorsComboBox.Visibility" Value="Visible" />
+                        <Setter Target="ActorsComboBox.Visibility" Value="Visible" />
+                        <Setter Target="RemoveSelectionButton.Visibility" Value="Visible" />
+                        <Setter Target="DetailedView.(Grid.Row)" Value="1" />
+                        <Setter Target="DetailedView.(Grid.Column)" Value="1" />
+                        <Setter Target="DetailedView.(Grid.ColumnSpan)" Value="1" />
+                        <Setter Target="MovieGridView.(Grid.ColumnSpan)" Value="2" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="NarrowLayout">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="GenresComboBox.Visibility" Value="Collapsed" />
+                        <Setter Target="DirectorsComboBox.Visibility" Value="Collapsed" />
+                        <Setter Target="ActorsComboBox.Visibility" Value="Collapsed" />
+                        <Setter Target="RemoveSelectionButton.Visibility" Value="Collapsed" />
+                        <Setter Target="SortButton.Visibility" Value="Collapsed" />
+                        <Setter Target="BrowseButton.Visibility" Value="Collapsed" />
+                        <Setter Target="DetailedView.(Grid.Row)" Value="1" />
+                        <Setter Target="DetailedView.(Grid.Column)" Value="0" />
+                        <Setter Target="DetailedView.(Grid.ColumnSpan)" Value="2" />
+                        <Setter Target="DetailedView.Height" Value="150" />
+                        <Setter Target="DetailedView.Background" Value="{ThemeResource SystemControlBackgroundChromeMediumBrush}" />
+                        <Setter Target="DetailedView.HorizontalAlignment" Value="Stretch" />
+                        <Setter Target="DetailedView.VerticalAlignment" Value="Bottom" />
+                        <Setter Target="PosterImage.Visibility" Value="Collapsed" />
+                        <Setter Target="TitleTextblock.FontSize" Value="20" />
+                        <Setter Target="YearTextblock.FontSize" Value="18" />
+                        <Setter Target="MovieGridView.(Grid.ColumnSpan)" Value="2" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2.5*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+
+        <RelativePanel Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}" Height="48" Grid.Row="0" Grid.ColumnSpan="2">
+            <Button Name="AddMovieButton"
+                    RelativePanel.AlignLeftWithPanel="True"
+                    Click="AddMovieButton_Click"
+                    FontSize="20"
+                    Height="48"
+                    Margin="5,0,5,0"
+                    Style="{StaticResource DateTimePickerFlyoutButtonStyle}"
+                    Content="Add movie" 
+                    />
+
+            <Button Name="RemoveMovieButton"
+                    Click="RemoveMovieButton_Click"
+                    RelativePanel.RightOf="AddMovieButton"
+                    FontSize="20"
+                    Height="48"
+                    Margin="5,0,5,0"
+                    Style="{StaticResource DateTimePickerFlyoutButtonStyle}"
+                    Content="Remove"
+                    />
+
+            <Button Name="ModifyMovieButton"
+                    Click="ModifyMovieButton_Click"
+                    RelativePanel.RightOf="RemoveMovieButton"
+                    FontSize="20"
+                    Height="48"
+                    Margin="5,0,5,0"
+                    Style="{StaticResource DateTimePickerFlyoutButtonStyle}"
+                    Content="Modify metadata"
+                    />
+
+            <Button Name="BrowseButton"
+                    Click="BrowseButton_Click"
+                    RelativePanel.LeftOf="RemoveSelectionButton"
+                    FontFamily="Segoe MDL2 Assets"
+                    FontSize="20"
+                    Content="&#xE896;"
+                    Height="48"
+                    Width="48"
+                    Margin="5,0,0,0"
+                    Style="{StaticResource DateTimePickerFlyoutButtonStyle}"
+                    />
+
+            <Button Name="RemoveSelectionButton"
+                    Click="RemoveSelectionButton_Click"
+                    RelativePanel.LeftOf="SortButton"
+                    FontFamily="Segoe MDL2 Assets"
+                    FontSize="20"
+                    Content="&#xE10A;"
+                    Height="48"
+                    Width="48"
+                    Margin="5,0,0,0"
+                    Style="{StaticResource DateTimePickerFlyoutButtonStyle}"
+                    />
+
+            <Button Name="SortButton"
+                    Click="SortButton_Click"
+                    RelativePanel.LeftOf="GenresComboBox"
+                    FontFamily="Segoe MDL2 Assets"
+                    FontSize="20"
+                    Content="&#xE71D;"
+                    Height="48"
+                    Width="48"
+                    Margin="5,0,0,0"
+                    Style="{StaticResource DateTimePickerFlyoutButtonStyle}"
+                    />
+
+            <ComboBox Name="GenresComboBox" 
+                      RelativePanel.LeftOf="DirectorsComboBox"
+                      RelativePanel.AlignVerticalCenterWithPanel="True"
+                      FontSize="18"
+                      FontWeight="Light"
+                      Height="38"
+                      Width="110"
+                      Margin="5,0,5,0" BorderThickness="1"
+                      PlaceholderText="Genres"
+                      SelectionChanged="ComboBox_SelectionChanged"
+                      ItemsSource="{x:Bind Genres}"
+                      >
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" Width="Auto" Height="Auto">
+                            <TextBlock Text="{Binding}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+
+            <ComboBox Name="DirectorsComboBox"
+                      RelativePanel.LeftOf="ActorsComboBox"
+                      RelativePanel.AlignVerticalCenterWithPanel="True"
+                      FontSize="18"
+                      FontWeight="Light"
+                      Height="38"
+                      Width="110"
+                      Margin="5,0,5,0" BorderThickness="1"
+                      PlaceholderText="Directors"
+                      SelectionChanged="ComboBox_SelectionChanged"
+                      ItemsSource="{x:Bind Directors}"
+                      >
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" Width="Auto" Height="Auto">
+                            <TextBlock Text="{Binding}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+
+            <ComboBox Name="ActorsComboBox"
+                      RelativePanel.AlignRightWithPanel="True"
+                      RelativePanel.AlignVerticalCenterWithPanel="True"
+                      FontSize="18"
+                      FontWeight="Light"
+                      Height="38"
+                      Width="110"
+                      Margin="5,0,5,0" BorderThickness="1"
+                      PlaceholderText="Actors"
+                      SelectionChanged="ComboBox_SelectionChanged"
+                      ItemsSource="{x:Bind Actors}"
+                      >
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" Width="Auto" Height="Auto">
+                            <TextBlock Text="{Binding}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </RelativePanel>
+
+        <controls:AdaptiveGridView x:Name="MovieGridView"
+                                   ItemsSource="{x:Bind Movies}"
+                                   Grid.Row="1"
+                                   Grid.Column="0"
+                                   OneRowModeEnabled="False"
+                                   ItemHeight="300"
+                                   DesiredWidth="200"
+                                   SelectionMode="Single"
+                                   IsItemClickEnabled="True"
+                                   ItemClick="GridView_ItemClick" 
+                                   ItemTemplate="{StaticResource PhotosTemplate}" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+                                   HorizontalAlignment="Stretch"
+                                   VerticalAlignment="Stretch" Margin="10,0,356,0"
+                                   >
+        </controls:AdaptiveGridView>
+
+        <ScrollViewer Name="DetailedView" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Image Grid.Row="0" 
+                       Name="PosterImage" 
+                       VerticalAlignment="Top" 
+                       HorizontalAlignment="Center" 
+                       Margin="20,5,35,5"
+                       PointerEntered="PosterImage_PointerEntered"
+                       />
+                <FlyoutPresenter 
+                    Name="PlayMoviePresenter"
+                    Visibility="Collapsed"
+                    Margin="20,5,35,5"
+                    Opacity="0.7"
+                    Background="DarkGray"
+                    PointerExited="PlayMoviePresenter_PointerExited"
+                >
+                    <Button Name="PlayButton"
+                    Click="PlayButton_Click"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontFamily="Segoe MDL2 Assets"
+                    FontSize="70"
+                    Content="&#xE893;"
+                    Height="100"
+                    Width="100"
+                    Margin="0,0,0,0"
+                    Style="{StaticResource DateTimePickerFlyoutButtonStyle}" />
+                </FlyoutPresenter>
+
+                <TextBlock Grid.Row="1"
+                           Name="TitleTextblock"
+                           TextWrapping="Wrap"
+                           Style="{StaticResource SubheaderTextBlockStyle}"
+                           FontSize="26"
+                           FontWeight="Normal"
+                           Margin="5,0,5,0"
+                           />
+
+                <TextBlock Grid.Row="2"
+                           Name="GenresTextblock"
+                           Margin="5,5,5,5"
+                           TextWrapping="Wrap" Style="{StaticResource SubheaderTextBlockStyle}"
+                           Foreground="{ThemeResource SystemAccentColor}"
+                           FontSize="21"
+                           />
+
+                <TextBlock Grid.Row="3"
+                           Name="YearTextblock"
+                           TextWrapping="Wrap"
+                           Style="{StaticResource HeaderTextBlockStyle}"
+                           FontSize="24"
+                           Margin="5,0,5,5"
+                           />
+
+                <TextBlock Grid.Row="4"
+                           Name="PlotTextblock"
+                           Margin="5,0,0,10"
+                           TextWrapping="Wrap" Style="{StaticResource CaptionTextBlockStyle}"
+                           FontSize="18"
+                           />
+
+                <TextBlock Grid.Row="5"
+                           Name="DirectorsTextblockHolder"
+                           Margin="5,0,0,5"
+                           TextWrapping="Wrap" Style="{StaticResource CaptionTextBlockStyle}"
+                           FontSize="18"
+                           FontWeight="SemiBold"
+                           />
+                <TextBlock Grid.Row="6"
+                           Name="DirectorsTextblock"
+                           Margin="5,0,0,10"
+                           TextWrapping="Wrap" Style="{StaticResource CaptionTextBlockStyle}"
+                           FontSize="18"
+                           />
+
+                <TextBlock Grid.Row="7"
+                           Name="ActorsTextblockHolder"
+                           Margin="5,0,0,5"
+                           TextWrapping="Wrap" Style="{StaticResource CaptionTextBlockStyle}"
+                           FontSize="18"
+                           FontWeight="SemiBold"
+                           />
+                
+                <TextBlock Grid.Row="8"
+                           Name="ActorsTextblock"
+                           Margin="5,0,0,10"
+                           TextWrapping="Wrap" Style="{StaticResource CaptionTextBlockStyle}"
+                           FontSize="18"
+                           />
+
+                <TextBlock Grid.Row="9"
+                           Name="PathTextblock"
+                           Margin="5,0,0,10"
+                           TextWrapping="Wrap" Style="{StaticResource CaptionTextBlockStyle}"
+                           FontSize="16"
+                           Foreground="SlateGray"
+                           />
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+
+</Page>

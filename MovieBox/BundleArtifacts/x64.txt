@@ -1,0 +1,6 @@
+MainPackage=C:\Users\Dusan Jovanovic\documents\visual studio 2017\Projects\MovieBox\MovieBox\bin\x64\Release\MovieBox_1.0.1.0_x64.appx
+SymbolPackage=C:\Users\Dusan Jovanovic\Desktop\MovieBox_1.0.1.0_Test\MovieBox_1.0.1.0_x64.appxsym
+ResourcePack=C:\Users\Dusan Jovanovic\documents\visual studio 2017\Projects\MovieBox\MovieBox\bin\x64\Release\MovieBox_1.0.1.0_scale-100.appx
+ResourcePack=C:\Users\Dusan Jovanovic\documents\visual studio 2017\Projects\MovieBox\MovieBox\bin\x64\Release\MovieBox_1.0.1.0_scale-125.appx
+ResourcePack=C:\Users\Dusan Jovanovic\documents\visual studio 2017\Projects\MovieBox\MovieBox\bin\x64\Release\MovieBox_1.0.1.0_scale-150.appx
+ResourcePack=C:\Users\Dusan Jovanovic\documents\visual studio 2017\Projects\MovieBox\MovieBox\bin\x64\Release\MovieBox_1.0.1.0_scale-400.appx

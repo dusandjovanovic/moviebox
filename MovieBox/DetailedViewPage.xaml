@@ -1,0 +1,235 @@
+﻿<Page
+    x:Class="MovieBox.DetailedViewPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MovieBox"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:converters="using:Microsoft.Toolkit.Uwp.UI.Converters"
+    xmlns:local1="using:MovieBox.NeoModels"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <converters:StringFormatConverter x:Key="StringFormatConverter"/>
+
+        <DataTemplate x:DataType="local1:Movie" x:Key="Default">
+            <StackPanel Margin="0,8">
+                <TextBlock Text="{x:Bind Title}" Style="{ThemeResource SubtitleTextBlockStyle}" Foreground="{ThemeResource DefaultTextForegroundThemeBrush}" FontSize="17"/>
+                <TextBlock Text="{x:Bind Year}" Style="{ThemeResource BodyTextBlockStyle}" Foreground="{ThemeResource SystemControlBackgroundAccentBrush}" MaxLines="1" FontSize="14"/>
+                <TextBlock Text="{x:Bind Overview}" Style="{ThemeResource BodyTextBlockStyle}" Opacity=".6" MaxLines="2" FontSize="13"/>
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate  x:Key="DefaultDetails">
+            <ScrollViewer>
+            <RelativePanel Margin="24,24,10,24" >
+                <RelativePanel Name="Holder" RelativePanel.AlignTopWithPanel="True">
+                    <Image x:Name="PosterImage" Source="{Binding Path=Title, Converter={StaticResource imageConverter}}" Stretch="UniformToFill" HorizontalAlignment="Left" VerticalAlignment="Top" MaxWidth="250" MaxHeight="375" Margin="0,0,12,0"/>
+                    <TextBlock x:Name="YearLine" Foreground="{ThemeResource DefaultTextForegroundThemeBrush}" Text="{Binding Title}" Style="{StaticResource HeaderTextBlockStyle}" FontSize="26" RelativePanel.RightOf="PosterImage"  Margin="0,0,0,0" />
+                    <TextBlock x:Name="SubjectLine" Foreground="{ThemeResource DefaultTextForegroundThemeBrush}" Text="{Binding Year}" Style="{StaticResource SubheaderTextBlockStyle}" FontSize="24" RelativePanel.Below="YearLine" RelativePanel.RightOf="PosterImage"  Margin="0,15,0,0" />
+                    <TextBlock x:Name="Genres" Text="{Binding Path=Genres, Converter={StaticResource arrayConverter}}" Style="{StaticResource BodyTextBlockStyle}" FontSize="19" FontWeight="Light" Foreground="{ThemeResource SystemAccentColor}" TextWrapping="Wrap" RelativePanel.Below="SubjectLine" RelativePanel.RightOf="PosterImage" Margin="0,15,0,0"/>
+                </RelativePanel>
+
+                <TextBlock x:Name="RuntimeContent" Foreground="{ThemeResource DefaultTextForegroundThemeBrush}" Text="{Binding Runtime}" Style="{StaticResource BodyTextBlockStyle}" FontSize="20" TextWrapping="Wrap" RelativePanel.Below="Holder" HorizontalAlignment="Left" Margin="0,15,0,0" />
+                <TextBlock x:Name="Runtime" Foreground="{ThemeResource DefaultTextForegroundThemeBrush}" Text=" minutes" Style="{StaticResource BodyTextBlockStyle}" FontSize="20" TextWrapping="Wrap" RelativePanel.RightOf="RuntimeContent" RelativePanel.Below="Holder" HorizontalAlignment="Left" Margin="0,15,0,0" />
+
+                <TextBlock x:Name="Body" Foreground="{ThemeResource DefaultTextForegroundThemeBrush}" Text="{Binding Plot}" Style="{StaticResource BodyTextBlockStyle}" FontSize="19" TextWrapping="Wrap" RelativePanel.Below="Runtime" Margin="0,15,0,0" />
+
+                <TextBlock x:Name="Director" Foreground="{ThemeResource DefaultTextForegroundThemeBrush}" Text="Director: " Style="{StaticResource BodyTextBlockStyle}" FontSize="20" TextWrapping="Wrap" RelativePanel.Below="Body" Margin="0,15,0,0"/>
+                <TextBlock x:Name="DirectorContent" Foreground="{ThemeResource DefaultTextForegroundThemeBrush}" Text="{Binding Path=Directors, Converter={StaticResource arrayConverter}}" Style="{StaticResource BodyTextBlockStyle}" FontSize="20" FontWeight="Light" TextWrapping="Wrap" RelativePanel.Below="Director" />
+
+                <TextBlock x:Name="Writers" Foreground="{ThemeResource DefaultTextForegroundThemeBrush}" Text="Writers: " Style="{StaticResource BodyTextBlockStyle}" FontSize="20" TextWrapping="Wrap" RelativePanel.Below="DirectorContent" Margin="0,15,0,0"/>
+                <TextBlock x:Name="WritersContent" Foreground="{ThemeResource DefaultTextForegroundThemeBrush}" Text="{Binding Path=Writers, Converter={StaticResource arrayConverter}}" Style="{StaticResource BodyTextBlockStyle}" FontSize="20" FontWeight="Light" TextWrapping="Wrap" RelativePanel.Below="Writers" />
+
+                <TextBlock x:Name="Themed" Foreground="{ThemeResource DefaultTextForegroundThemeBrush}" Text="Adult themed: " Style="{StaticResource BodyTextBlockStyle}" FontSize="20" TextWrapping="Wrap" RelativePanel.Below="WritersContent" Margin="0,15,0,0"/>
+                <TextBlock x:Name="ThemedCondent" Foreground="{ThemeResource DefaultTextForegroundThemeBrush}" Text="{Binding Path=IsAdultThemed}" Style="{StaticResource BodyTextBlockStyle}" FontSize="20" FontWeight="Light" TextWrapping="Wrap" RelativePanel.Below="Themed" />
+
+                <TextBlock x:Name="Popularity" Foreground="{ThemeResource DefaultTextForegroundThemeBrush}" Text="Popularity: " Style="{StaticResource BodyTextBlockStyle}" FontSize="20" TextWrapping="Wrap" RelativePanel.Below="ThemedCondent" Margin="0,15,0,0"/>
+                <TextBlock x:Name="PopularityContent" Foreground="{ThemeResource DefaultTextForegroundThemeBrush}" Text="{Binding Path=Popularity}" Style="{StaticResource BodyTextBlockStyle}" FontSize="20" FontWeight="Light" TextWrapping="Wrap" RelativePanel.Below="Popularity" />
+
+                <TextBlock x:Name="Avarage" Foreground="{ThemeResource DefaultTextForegroundThemeBrush}" Text="Vote avarage: " Style="{StaticResource BodyTextBlockStyle}" FontSize="20" TextWrapping="Wrap" RelativePanel.Below="PopularityContent" Margin="0,15,0,0"/>
+                <TextBlock x:Name="AvarageContent" Foreground="{ThemeResource DefaultTextForegroundThemeBrush}" Text="{Binding Path=VoteAverage}" Style="{StaticResource BodyTextBlockStyle}" FontSize="20" FontWeight="Light" TextWrapping="Wrap" RelativePanel.Below="Avarage" />
+
+                <TextBlock x:Name="Count" Foreground="{ThemeResource DefaultTextForegroundThemeBrush}" Text="Vote count: " Style="{StaticResource BodyTextBlockStyle}" FontSize="20" TextWrapping="Wrap" RelativePanel.Below="AvarageContent" Margin="0,15,0,0"/>
+                <TextBlock x:Name="CountContent" Foreground="{ThemeResource DefaultTextForegroundThemeBrush}" Text="{Binding Path=VoteCount}" Style="{StaticResource BodyTextBlockStyle}" FontSize="20" FontWeight="Light" TextWrapping="Wrap" RelativePanel.Below="Count" />
+
+                <TextBlock x:Name="Actors" Foreground="{ThemeResource DefaultTextForegroundThemeBrush}" Text="Actors: " Style="{StaticResource BodyTextBlockStyle}" FontSize="20" TextWrapping="Wrap" RelativePanel.Below="CountContent" Margin="0,15,0,0" MaxLines="10"/>
+                <TextBlock x:Name="ActorsContent" Foreground="{ThemeResource DefaultTextForegroundThemeBrush}" Text="{Binding Path=Actors, Converter={StaticResource arrayConverter}}" Style="{StaticResource BodyTextBlockStyle}" FontSize="20" FontWeight="Light" TextWrapping="Wrap" RelativePanel.Below="Actors" />
+            </RelativePanel>
+            </ScrollViewer>
+        </DataTemplate>
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="VisualStateGroup">
+                <VisualState x:Name="WideLayout">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1050" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="NarrowLayout">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="DetailsPanel.Visibility" Value="Collapsed" />
+                        <Setter Target="MasterView.(Grid.Column)" Value="0" />
+                        <Setter Target="MasterView.(Grid.ColumnSpan)" Value="2" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="270" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Orientation="Vertical" x:Name="DetailsPanel">
+
+            <Grid VerticalAlignment="Center" Margin="10,25,10,15" HorizontalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="32"/>
+                    <ColumnDefinition Width="180"/>
+                    <ColumnDefinition Width="32"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0"
+                           Name="minYear"
+                       Text="{Binding RangeMin, ElementName=YearRange, Converter={StaticResource StringFormatConverter}, ConverterParameter='{}{0:0.##}'}"
+                       Foreground="{ThemeResource DefaultTextForegroundThemeBrush}"
+                       />
+                <controls:RangeSelector x:Name="YearRange" 
+                                    Grid.Column="1"
+                                    Minimum="0" 
+                                    Maximum="100"
+                                    ValueChanged="YearRange_ValueChanged"
+                                    >
+                </controls:RangeSelector>
+                <TextBlock Grid.Column="2"
+                           Name="maxYear"
+                       Text="{Binding RangeMax, ElementName=YearRange, Converter={StaticResource StringFormatConverter}, ConverterParameter='{}{0:0.##}'}"
+                       Foreground="{ThemeResource DefaultTextForegroundThemeBrush}"
+                           />
+            </Grid>
+
+            <Grid VerticalAlignment="Center" Margin="10,25,10,15" HorizontalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="25"/>
+                    <ColumnDefinition Width="180"/>
+                    <ColumnDefinition Width="25"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" 
+                           Name="minRange"
+                       Text="{Binding RangeMin, ElementName=RuntimeRange, Converter={StaticResource StringFormatConverter}, ConverterParameter='{}{0:0.##}'}"
+                       Foreground="{ThemeResource DefaultTextForegroundThemeBrush}"/>
+                <controls:RangeSelector x:Name="RuntimeRange" 
+                                    Grid.Column="1"
+                                    Minimum="0" 
+                                    Maximum="100"
+                                    ValueChanged="YearRange_ValueChanged"
+                                    >
+                </controls:RangeSelector>
+                <TextBlock Grid.Column="2" 
+                           Name="maxRange"
+                       Text="{Binding RangeMax, ElementName=RuntimeRange, Converter={StaticResource StringFormatConverter}, ConverterParameter='{}{0:0.##}'}"
+                       Foreground="{ThemeResource DefaultTextForegroundThemeBrush}"/>
+            </Grid>
+
+            <Border BorderBrush="Silver" BorderThickness="1" Margin="5,15,5,0">
+                <ListView Name="GenresList"
+                      Foreground="{ThemeResource DefaultTextForegroundThemeBrush}"
+                      Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+                      ItemsSource="{x:Bind Genres}"
+                      IsItemClickEnabled="True" 
+                      MaxHeight="175"
+                      SelectionMode="Multiple"
+                      SelectionChanged="GenresList_SelectionChanged"
+                      >
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="x:String">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding}" FontSize="16" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Border>
+
+            <FlyoutPresenter Content="Choose genres here" Background="LightYellow" Foreground="DarkSlateGray"  Margin="0,-135,0,0" Width="180" Height="48" HorizontalContentAlignment="Center" HorizontalAlignment="Center" PointerEntered="FlyoutPresenter_PointerEntered"/>
+
+            <Border BorderBrush="Silver" BorderThickness="1" Margin="5,15,5,0">
+                <ListView Name="DirectorsList"
+                      Foreground="{ThemeResource DefaultTextForegroundThemeBrush}"
+                      Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+                      ItemsSource="{x:Bind Directors}"
+                      IsItemClickEnabled="True" 
+                      MaxHeight="175"
+                      SelectionMode="Multiple"
+                      SelectionChanged="DirectorsList_SelectionChanged"
+                      >
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="x:String">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding}" FontSize="16" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Border>
+
+            <FlyoutPresenter Content="Choose directors here" Background="LightYellow" Foreground="DarkSlateGray"  Margin="0,-135,0,0" Width="180" Height="48" HorizontalContentAlignment="Center" HorizontalAlignment="Center" PointerEntered="FlyoutPresenter_PointerEntered_1"/>
+
+            <Border BorderBrush="Silver" BorderThickness="1" Margin="5,15,5,0">
+                <ListView Name="ActorsList"
+                      Foreground="{ThemeResource DefaultTextForegroundThemeBrush}"
+                      Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+                      ItemsSource="{x:Bind Actors}"
+                      IsItemClickEnabled="True" 
+                      MaxHeight="175"
+                      SelectionMode="Multiple"
+                      SelectionChanged="ActorsList_SelectionChanged"
+                      >
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="x:String">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding}" FontSize="16" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Border>
+
+            <FlyoutPresenter Content="Choose actors here" Background="LightYellow" Foreground="DarkSlateGray"  Margin="0,-135,0,0" Width="180" Height="48" HorizontalContentAlignment="Center" HorizontalAlignment="Center" PointerEntered="FlyoutPresenter_PointerEntered_2"/>
+        </StackPanel>
+
+        <controls:MasterDetailsView ItemsSource="{x:Bind Movies}"
+                                    x:Name="MasterView"
+                                    Grid.Column="1"
+                                    NoSelectionContent="Select a Movie to view"
+                                    Foreground="DarkGray"
+                                    ItemTemplate="{StaticResource Default}"
+                                    DetailsTemplate="{StaticResource DefaultDetails}"
+                                    >
+            <controls:MasterDetailsView.NoSelectionContentTemplate>
+                <DataTemplate>
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <SymbolIcon Symbol="Document" RenderTransformOrigin=".5,.5">
+                            <SymbolIcon.RenderTransform>
+                                <CompositeTransform ScaleX="2" ScaleY="2"/>
+                            </SymbolIcon.RenderTransform>
+                        </SymbolIcon>
+                        <TextBlock Text="{Binding}" FontSize="24" FontWeight="Light" Margin="0,12"/>
+                    </StackPanel>
+                </DataTemplate>
+            </controls:MasterDetailsView.NoSelectionContentTemplate>
+        </controls:MasterDetailsView>
+
+    </Grid>
+</Page>
