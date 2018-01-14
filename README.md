@@ -131,8 +131,9 @@ Metode:
 
 `_removeSeason(Season todelete)` za brisanje sezone postojeće serije.
 
+#### Cypher query i pristupanje kroz neo4jclient
+Primer Cypher naredbi i pristupanja bazi na metodi `ObservableCollection<Movie> _readByMultiple`. Ova metoda se koristi na DetailedView stranici aplikacije. Pre svega se odaberu parametri po kojima će biti izvršeno filtriranje.
 
-Primer Cypher naredbi i pristupanja bazi na metodi `ObservableCollection<Movie> _readByMultiple`
 Atributi:
 * `int runtimeLow` : donja granica trajanja
 
@@ -148,7 +149,7 @@ Atributi:
 
 * `IEnumerable<object> genres` : lista žanrova
 
-            `var returned = _instance.Cypher
+            var returned = _instance.Cypher
                .Match("(movie:Movie)<-[ACTS_IN]-(actor:Actor)")
                .Match("(movie:Movie)<-[DIRECTED]-(director:Director)")
                .Match("(movie:Movie)-[IS_GENRE]->(genre:Genre)")
@@ -169,6 +170,86 @@ Atributi:
                .Results;`
        
        
+       
 ![alt text][detailed]
 
 [detailed]: metadata/detailed.PNG
+
+
+
+## Opis i slučajevi korišćenja
+
+Početna stranica aplikacije se učitava prilikom svakog pokretanja iste i predsatvlja osnovni pregled svih filmova koji su trenutno prisutni u kolekciji. Sa leve strane se nalazi navigacioni meni, a sa desne strane se nalaze osnovni podaci o trenutno selektovanom filmu. Pri vrhu se redom nalaze mogućnosti dodavanja, modifikacije, brisanja, uvoza filmova iz foldera, sortiranja po alfabetnom redosledu, ukidanje modifikacije prikaza i izbor parametara žanrova, režisera i glumaca.
+
+![alt text][main]
+
+[main]: metadata/movies.PNG
+
+### Navigacioni meni i pregled filmova
+
+Prva stavka navigacionog menija predstavlja pregled svih filmova trenutno prisutnih u kolekciji, inicijalno je izabrana prilikom pokretanja aplikacije. U centralnom delu se nalazi takozvani Grid pregled filmova u kome su svi prisutni filmovi predstavljeni u vidu njihovih poster slika i naziva. Klikom na neki od filmova iz ovog pregleda on je izabran i sa desne strane se mogu videti osnovne informacije o izabranom filmu. Osnovne informacije uključuju veću sliku, naziv, godinu, žanr, režisere i glumce. Celokupna slika se može videti na Slika 1.0 s obzirom da je pri pokretanju aplikacije inicijalno izabran pregled svih filmova u kolekciji korisnika. Za stavke sa specificiranim atrbutom putanje se nalazi i informacija o putanji do konkretnog fajla na memorijskom medijumu.
+
+
+![alt text][navigation]
+
+[navigation]: metadata/navigation.PNG
+
+### Dodavanje filma
+Klikom na Add dugme u gornjem meniju otvara se dijalog dodavanja novog filma u kolekciju. Od korisnika se očekuje da unese naziv filma u prvo polje ovog dijaloga, i po mogućstvu putanju do fajla u polju Path. Klikom na dugme Find metadata se pokreće proces pribavljanja meta podataka o filmu. Nakon pribavljanja korisnik dodaje film klikom na dugme Add.
+
+![alt text][add]
+
+[add]: metadata/add.PNG
+
+
+### Modifikacija filma, ponovno pribavljanje metadapodataka
+Klikom na Modify dugme u gornjem meniju otvara se dijalog promene atrbibuta postojećeg filma iz kolekcije. Na korisniku je sada izbor koje će konkretne atrbute filma menjati, ima na raspolaganju menjanje svih atrbuta konkretnog filma osim samog naziva. Klikom na dugme Refresh metadata se pokreće proces ponovnog pribavljanja meta podataka o filmu. Nakon željenih modifikacija korisnik pritiskom na  dugme Modify menja informacije o izabranom filmu. Ova mogućnost je najsmislenija prilkom promene atributa putanje do samog multimedijalog fajla.
+
+### Brisanje filma
+Klikom na dugme Remove se briše trenutno selektovani film iz kolekcije, pre samog brisanja se proverava izvršenje sa korisnikom uz Message dijalog. Klikom na Yes, Remove film je nepovratno obrisan iz kolekcije filmova.
+
+### Reprodukcija filmova
+Za svaki film koji je prisutan na memorijskom medijumu i pritom je definisan njegov atrbut putanje, prethodno od strane korisnika, prelaskom kursora preko slike filma u osnovnom pregledu javiće se dugme za reprodukciju. Klikom na dugme za reprodukciju prelazi se na stranicu reprodukcije Now Playing..  i momentalno se vrši reprodukcija prethodno selektovanog filma. Korisnik ima mogućnost kontrole reprodukcije, kao i mogućnost Full screen režima.
+
+### Pregled sezona serija
+Druga stavka navigacionog menija predstavlja pregled svih sezona serija trenutno prisutnih u kolekciji, ovaj pregled se bira klikom na ikonicu druge stavke samog navigacionog menija. U centralnom delu se nalazi takozvani Grid pregled sezona u kome su svi prisutne sve sezone serija predstavljeni u vidu njihovih poster slika i naziva koji uključuje ime serije, odnosno serijala i broj same sezone istog. Klikom na neku od serija iz ovog pregleda ona postaje izabrana i sa desne strane se mogu videti osnovne informacije o izabranoj seriji. Osnovne informacije uključuju veću sliku, naziv, godinu, žanr, pisce, mrežu na kojoj je serija reproukovana i poslednji datum reprodukcije. Za stavke sa specificiranim atrbutom putanje se nalazi i informacija o putanji do konkretnog foldera na memorijskom medijumu.
+
+![alt text][series]
+
+[add]: metadata/series.PNG
+
+
+### Dodavanje sezone
+Klikom na Add dugme u gornjem meniju otvara se dijalog dodavanja nove sezone u kolekciju. Od korisnika se očekuje da unese naziv serije i broj sezone, i po mogućstvu putanju do foldera u polju Path. Klikom na dugme Find metadata se pokreće proces pribavljanja meta podataka o sezoni. Nakon pribavljanja korisnik dodaje sezonu klikom na dugme Add.
+
+![alt text][addSeason]
+
+[addSeason]: metadata/addSeason.PNG
+
+### Modifikacija sezone, ponovno pribavljanje metadapodataka
+Klikom na Modify dugme u gornjem meniju otvara se dijalog promene atrbibuta postojeće sezone iz kolekcije. Na korisniku je sada izbor koje će konkretne atrbute sezone menjati, ima na raspolaganju menjanje svih atrbuta konkretne sezone osim samog naziva, koji uključuje i specifikaciju broja sezone. Klikom na dugme Find metadata se pokreće proces ponovnog pribavljanja meta podataka o sezoni. Nakon željenih modifikacija korisnik pritiskom na  dugme Modify menja informacije o izabranoj sezoni. Ova mogućnost je najsmislenija prilkom promene atributa putanje do samog foldera u kome se nalaze epizode sezone.
+
+### Brisanje sezone
+Klikom na dugme Remove se briše trenutno selektovana sezona iz kolekcije, pre samog brisanja se proverava izvršenje sa korisnikom uz Message dijalog. Klikom na Yes, Remove sezona je nepovratno obrisana iz kolekcije.
+
+### Preporuka filmova i dodavanje izabranih
+Treća stavka navigacinog menija predstavlja pregled preporučenih filmova koji se instantno mogu dodati u kolekciju. Svako pribavljanje je različito i dobija se kao rezultat lista od dvadeset filmova koji su preporučeni korisniku po trenutnom stanju njegove kolekcije. Sam proces pribavljanje se počinje klikom na dugme Refresh u gornjem meniju, nakon pribavljanje kroz listu korisnik prolazi dugmićima levo i desno. Selekcijom Add to collection trenutno izabrani film iz preporučene liste će biti dodat u kolekciju. Nakon selekcije svih željenih filmova potrebno je klikunuti na dugme Add selected i svi selektovani filmovi će biti pridodati kolekciji.
+
+![alt text][recommend]
+
+[recommend]: metadata/explore.PNG
+
+### Detaljan prikaz filmova i filtriranje
+Četvrta stavka navigacionog menija predstavlja detaljan pregled filmova. Ovo uključuje prikazivanje svih dostupnih meta podataka o filmu u desnom delu, listu filmova u središnjem i filtriranje liste u levom. Filtriranje uključuje izbor ograničenja godine filma, na isti način ograničenje trajanja, izbor žanrova koji treba da odgovaraju svakom filmu u listi, izbor režisera i na kraju izbor glumaca. Svi ovi parametri zajedno odredjuju koji će film biti prikazan u filtriranoj listi. Samo oni filmovi koji odgovaraju svim parametrima filtrirana će biti uvršćeni u rezultujuću listu.
+
+![alt text][details]
+
+[details]: metadata/detailed.PNG
+
+### Pretraga filmova
+Na svakoj stranici aplikacije, u gornjem desnom ugli postoji Search bar za pretraživanje kolekcije. Mogućnost predloga se generiše prilikom kucanja i uvek oslikava trenutno stanje kolekcije. Izborom nekog od filmova se dobija pregled njegovih informacija uz mogućnost instantne reprodukcije istog iz rezultata traženja.
+
+![alt text][search]
+
+[search]: metadata/search.PNG
+
