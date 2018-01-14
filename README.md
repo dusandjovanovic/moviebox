@@ -189,14 +189,9 @@ Početna stranica aplikacije se učitava prilikom svakog pokretanja iste i preds
 
 Prva stavka navigacionog menija predstavlja pregled svih filmova trenutno prisutnih u kolekciji, inicijalno je izabrana prilikom pokretanja aplikacije. U centralnom delu se nalazi takozvani Grid pregled filmova u kome su svi prisutni filmovi predstavljeni u vidu njihovih poster slika i naziva. Klikom na neki od filmova iz ovog pregleda on je izabran i sa desne strane se mogu videti osnovne informacije o izabranom filmu. Osnovne informacije uključuju veću sliku, naziv, godinu, žanr, režisere i glumce. Pri pokretanju aplikacije inicijalno je izabran pregled svih filmova u kolekciji korisnika. Za stavke sa specificiranim atrbutom putanje se nalazi i informacija o putanji do konkretnog fajla na memorijskom medijumu.
 
-
-![alt text][navigation]
-
-[navigation]: metadata/navigation.PNG
-
 **Osnovno filtriranje prikazanih filmova se zadaje iz drop-down menija Actors, Directors i Genres. Izborom nekog glumca, na primer, biće filtriran prikaz filmova tako da sadrži samo filmove koji su u vezi (u graph bazi) sa zadatim glumcem. Ista analogija važi i za filtriranje po režiserima i žanrovima. Moguće je kombinovanje ovih filtera. U primeru je izabran filter po žanru Adventure.**
 
-![alt filter][navigation]
+![alt text][filter]
 
 [filter]: metadata/filter.PNG
 
