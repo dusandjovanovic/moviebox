@@ -216,7 +216,7 @@ Druga stavka navigacionog menija predstavlja pregled svih sezona serija trenutno
 
 ![alt text][series]
 
-[add]: metadata/series.PNG
+[series]: metadata/series.PNG
 
 
 ### Dodavanje sezone
