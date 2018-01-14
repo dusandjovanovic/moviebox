@@ -165,4 +165,4 @@ Atributi:
        
 ![alt text][detailed]
 
-[detailed]: metadata/detailed.png
+[detailed]: metadata/detailed.PNG
