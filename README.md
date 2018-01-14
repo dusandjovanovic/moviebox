@@ -132,7 +132,7 @@ Metode:
 `_removeSeason(Season todelete)` za brisanje sezone postojeće serije.
 
 #### Cypher query i pristupanje kroz neo4jclient
-Primer Cypher naredbi i pristupanja bazi na metodi `ObservableCollection<Movie> _readByMultiple`. Ova metoda se koristi na DetailedView stranici aplikacije. Pre svega se odaberu parametri po kojima će biti izvršeno filtriranje.
+Primer Cypher naredbi i pristupanja bazi na metodi `ObservableCollection<Movie> _readByMultiple`. Ova metoda se koristi na DetailedView stranici aplikacije. Metoda vrši filtriranje filmova po zadatim atributima, rezultat predstavlja listu filmova u kojoj svaki film u potpinosti odgovara svakom od zadatih atributa. Vreme trajanja treba da bude izmedju donje i gornje granice, godina vezana za film takodje treba da odgovara granicama. Što se tiče glumaca, režisera i žanrova mora da postoji presek izmedju prosledjenih parametara i parametara entiteta filma koji se razmatra. U slučaju poklapanja glumaca dovoljno je da bar jedan od glumaca iz prosledjene liste bude prisutan i razmatranom filmu, isto važi za režisere i žanrove.
 
 Atributi:
 * `int runtimeLow` : donja granica trajanja
@@ -187,12 +187,18 @@ Početna stranica aplikacije se učitava prilikom svakog pokretanja iste i preds
 
 ### Navigacioni meni i pregled filmova
 
-Prva stavka navigacionog menija predstavlja pregled svih filmova trenutno prisutnih u kolekciji, inicijalno je izabrana prilikom pokretanja aplikacije. U centralnom delu se nalazi takozvani Grid pregled filmova u kome su svi prisutni filmovi predstavljeni u vidu njihovih poster slika i naziva. Klikom na neki od filmova iz ovog pregleda on je izabran i sa desne strane se mogu videti osnovne informacije o izabranom filmu. Osnovne informacije uključuju veću sliku, naziv, godinu, žanr, režisere i glumce. Celokupna slika se može videti na Slika 1.0 s obzirom da je pri pokretanju aplikacije inicijalno izabran pregled svih filmova u kolekciji korisnika. Za stavke sa specificiranim atrbutom putanje se nalazi i informacija o putanji do konkretnog fajla na memorijskom medijumu.
+Prva stavka navigacionog menija predstavlja pregled svih filmova trenutno prisutnih u kolekciji, inicijalno je izabrana prilikom pokretanja aplikacije. U centralnom delu se nalazi takozvani Grid pregled filmova u kome su svi prisutni filmovi predstavljeni u vidu njihovih poster slika i naziva. Klikom na neki od filmova iz ovog pregleda on je izabran i sa desne strane se mogu videti osnovne informacije o izabranom filmu. Osnovne informacije uključuju veću sliku, naziv, godinu, žanr, režisere i glumce. Pri pokretanju aplikacije inicijalno je izabran pregled svih filmova u kolekciji korisnika. Za stavke sa specificiranim atrbutom putanje se nalazi i informacija o putanji do konkretnog fajla na memorijskom medijumu.
 
 
 ![alt text][navigation]
 
 [navigation]: metadata/navigation.PNG
+
+**Osnovno filtriranje prikazanih filmova se zadaje iz drop-down menija Actors, Directors i Genres. Izborom nekog glumca, na primer, biće filtriran prikaz filmova tako da sadrži samo filmove koji su u vezi (u graph bazi) sa zadatim glumcem. Ista analogija važi i za filtriranje po režiserima i žanrovima. Moguće je kombinovanje ovih filtera. U primeru je izabran filter po žanru Adventure.**
+
+![alt filter][navigation]
+
+[filter]: metadata/filter.PNG
 
 ### Dodavanje filma
 Klikom na Add dugme u gornjem meniju otvara se dijalog dodavanja novog filma u kolekciju. Od korisnika se očekuje da unese naziv filma u prvo polje ovog dijaloga, i po mogućstvu putanju do fajla u polju Path. Klikom na dugme Find metadata se pokreće proces pribavljanja meta podataka o filmu. Nakon pribavljanja korisnik dodaje film klikom na dugme Add.
