@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.12
+VisualStudioVersion = 15.0.27130.2020
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieBox", "MovieBox\MovieBox.csproj", "{5101247C-E077-4540-8FD2-98CE2C2116A2}"
 EndProject
@@ -27,14 +27,17 @@ Global
 		{5101247C-E077-4540-8FD2-98CE2C2116A2}.Release|ARM.ActiveCfg = Release|ARM
 		{5101247C-E077-4540-8FD2-98CE2C2116A2}.Release|ARM.Build.0 = Release|ARM
 		{5101247C-E077-4540-8FD2-98CE2C2116A2}.Release|ARM.Deploy.0 = Release|ARM
-		{5101247C-E077-4540-8FD2-98CE2C2116A2}.Release|x64.ActiveCfg = Release|x64
-		{5101247C-E077-4540-8FD2-98CE2C2116A2}.Release|x64.Build.0 = Release|x64
-		{5101247C-E077-4540-8FD2-98CE2C2116A2}.Release|x64.Deploy.0 = Release|x64
+		{5101247C-E077-4540-8FD2-98CE2C2116A2}.Release|x64.ActiveCfg = Debug|x64
+		{5101247C-E077-4540-8FD2-98CE2C2116A2}.Release|x64.Build.0 = Debug|x64
+		{5101247C-E077-4540-8FD2-98CE2C2116A2}.Release|x64.Deploy.0 = Debug|x64
 		{5101247C-E077-4540-8FD2-98CE2C2116A2}.Release|x86.ActiveCfg = Release|x86
 		{5101247C-E077-4540-8FD2-98CE2C2116A2}.Release|x86.Build.0 = Release|x86
 		{5101247C-E077-4540-8FD2-98CE2C2116A2}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C992EFFE-9A5E-4B1F-B44F-26190F6EA05E}
 	EndGlobalSection
 EndGlobal

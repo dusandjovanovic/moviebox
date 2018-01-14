@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
+<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" xmlns:iot="http://schemas.microsoft.com/appx/manifest/iot/windows10" IgnorableNamespaces="uap mp iot">
   <Identity Name="62b1cd77-cc72-459c-bdbc-849043f241cb" Publisher="CN=Dusan Jovanovic" Version="1.0.1.0" />
   <mp:PhoneIdentity PhoneProductId="62b1cd77-cc72-459c-bdbc-849043f241cb" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
@@ -28,16 +28,9 @@
       </uap:VisualElements>
       <Extensions>
         <uap:Extension Category="windows.fileTypeAssociation">
-          <uap:FileTypeAssociation Name="avi">
+          <uap:FileTypeAssociation Name="mp4">
             <uap:SupportedFileTypes>
-              <uap:FileType>.avi</uap:FileType>
-            </uap:SupportedFileTypes>
-          </uap:FileTypeAssociation>
-        </uap:Extension>
-        <uap:Extension Category="windows.fileTypeAssociation">
-          <uap:FileTypeAssociation Name="mkv">
-            <uap:SupportedFileTypes>
-              <uap:FileType>.mkv</uap:FileType>
+              <uap:FileType>.mp4</uap:FileType>
             </uap:SupportedFileTypes>
           </uap:FileTypeAssociation>
         </uap:Extension>
@@ -49,17 +42,31 @@
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
-          <uap:FileTypeAssociation Name="mp4">
+          <uap:FileTypeAssociation Name="mkv">
             <uap:SupportedFileTypes>
-              <uap:FileType>.mp4</uap:FileType>
+              <uap:FileType>.mkv</uap:FileType>
+            </uap:SupportedFileTypes>
+          </uap:FileTypeAssociation>
+        </uap:Extension>
+        <uap:Extension Category="windows.fileTypeAssociation">
+          <uap:FileTypeAssociation Name="avi">
+            <uap:SupportedFileTypes>
+              <uap:FileType>.avi</uap:FileType>
             </uap:SupportedFileTypes>
           </uap:FileTypeAssociation>
         </uap:Extension>
       </Extensions>
+      <uap:ApplicationContentUriRules>
+        <uap:Rule Match="http://localhost:7474/" Type="include" WindowsRuntimeAccess="all" />
+      </uap:ApplicationContentUriRules>
     </Application>
   </Applications>
   <Capabilities>
     <Capability Name="internetClient" />
+    <Capability Name="internetClientServer" />
+    <Capability Name="privateNetworkClientServer" />
     <uap:Capability Name="videosLibrary" />
+    <iot:Capability Name="systemManagement" />
+    <uap:Capability Name="userAccountInformation" />
   </Capabilities>
 </Package>

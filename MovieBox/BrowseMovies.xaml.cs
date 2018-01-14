@@ -28,9 +28,9 @@ namespace MovieBox
     public sealed partial class BrowseMovies : ContentDialog
     {
 
-        private ObservableCollection<NeoModels.Movie> moviesPath;
+        private ObservableCollection<MovieBox.NeoModels.Movie> moviesPath;
         private ObservableCollection<string> files;
-        private NeoModels.Movie addMovie;
+        private MovieBox.NeoModels.Movie addMovie;
 
         /// <summary>
         /// API communication attributes
@@ -42,7 +42,7 @@ namespace MovieBox
             this.InitializeComponent();
             MovieDbFactory.RegisterSettings("c837ca9610248f9584be59c8a1f2d44b", "http://api.themoviedb.org/3/");
             movieAPI = MovieDbFactory.Create<IApiMovieRequest>().Value;
-            moviesPath = new ObservableCollection<NeoModels.Movie>();
+            moviesPath = new ObservableCollection<MovieBox.NeoModels.Movie>();
             files = new ObservableCollection<string>();
 
             this.initializeFiles();
@@ -52,7 +52,7 @@ namespace MovieBox
         {
             NeoSingleton._connect();
             await NeoSingleton._addMovieAsync(addMovie);
-            NeoModels.Movie movie = (NeoModels.Movie)MoviesList.SelectedItem;
+            MovieBox.NeoModels.Movie movie = (MovieBox.NeoModels.Movie)MoviesList.SelectedItem;
             movieList.Instance.addMovie(addMovie);
             moviesPath.Remove(movie);
         }
@@ -74,7 +74,7 @@ namespace MovieBox
             try
             {
                 addMovie = await ApiMovieAsync(movieTitle);
-                addMovie.Path = ((NeoModels.Movie)MoviesList.SelectedItem).Path;
+                addMovie.Path = ((MovieBox.NeoModels.Movie)MoviesList.SelectedItem).Path;
                 lblAlert.Text = "";
             }
             catch (Exception)
@@ -105,7 +105,7 @@ namespace MovieBox
         private void MoviesList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             AddButton.IsEnabled = false;
-            NeoModels.Movie selected = (NeoModels.Movie)MoviesList.SelectedItem;
+            MovieBox.NeoModels.Movie selected = (MovieBox.NeoModels.Movie)MoviesList.SelectedItem;
             txtYear.Text = "";
             txtDirectors.Text = "";
             txtGenres.Text = "";
@@ -133,7 +133,7 @@ namespace MovieBox
             foreach(String obj in files) {
                 String movieTitle = Path.GetFileName(obj);
                 movieTitle = movieTitle.Remove(movieTitle.Length - 4);
-                NeoModels.Movie movie = new NeoModels.Movie();
+                MovieBox.NeoModels.Movie movie = new MovieBox.NeoModels.Movie();
                 movie.Title = movieTitle;
                 movie.Path = obj;
                 moviesPath.Add(movie);
@@ -175,7 +175,7 @@ namespace MovieBox
             return true;
         }
 
-        private async Task<NeoModels.Movie> ApiMovieAsync(string searchQuery)
+        private async Task<MovieBox.NeoModels.Movie> ApiMovieAsync(string searchQuery)
         {
             ApiSearchResponse<MovieInfo> response = await movieAPI.SearchByTitleAsync(searchQuery);
 
@@ -183,7 +183,7 @@ namespace MovieBox
             ApiQueryResponse<DM.MovieApi.MovieDb.Movies.Movie> movieinfo = await movieAPI.FindByIdAsync(info.Id);
             ApiQueryResponse<DM.MovieApi.MovieDb.Movies.MovieCredit> credits = await movieAPI.GetCreditsAsync(info.Id);
 
-            NeoModels.Movie movie = new NeoModels.Movie(movieinfo.Item, credits.Item);
+            MovieBox.NeoModels.Movie movie = new MovieBox.NeoModels.Movie(movieinfo.Item, credits.Item);
 
             movie.Title = movie.Title.Replace(':', '-');
 

@@ -96,11 +96,23 @@ namespace MovieBox
             return false;
         }
 
+        public bool deleteMovie(int id)
+        {
+            foreach (Movie obj in listMovie)
+                if (obj.Id == id)
+                {
+                    listMovie.Remove(obj);
+                    return true;
+                }
+
+            return false;
+        }
+
         public bool existsInList(Movie movie)
         {
             foreach (var v in listMovie)
             {
-                if (v.Title == movie.Title)
+                if (v.Id == movie.Id)
                     return true;
             }
 

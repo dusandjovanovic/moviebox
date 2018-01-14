@@ -156,7 +156,7 @@ namespace MovieBox
                 return;
             else
             {
-                movieList.Instance.deleteMovie(selected);
+                movieList.Instance.deleteMovie(selected.Id);
                 NeoSingleton._connect();
                 await NeoSingleton._removeMovieAsync(selected);
             }

@@ -24,7 +24,6 @@ namespace MovieBox.NeoController
                 try
                 {
                     _instance.Connect();
-
                 }
                 catch (Exception exception)
                 {

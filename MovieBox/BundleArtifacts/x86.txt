@@ -1,2 +1,2 @@
-MainPackage=C:\Users\Dusan Jovanovic\documents\visual studio 2017\Projects\MovieBox\MovieBox\bin\x86\Release\MovieBox_1.0.1.0_x86.appx
-SymbolPackage=C:\Users\Dusan Jovanovic\Desktop\MovieBox_1.0.1.0_Test\MovieBox_1.0.1.0_x86.appxsym
+MainPackage=C:\Users\dusan\Desktop\MovieBox\MovieBox\bin\x86\Debug\MovieBox_1.0.1.0_x86_Debug.appx
+SymbolPackage=C:\Users\dusan\Desktop\MovieBox\MovieBox_1.0.1.0_Debug_Test\MovieBox_1.0.1.0_x86_Debug.appxsym
