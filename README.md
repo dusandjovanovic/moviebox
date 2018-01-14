@@ -171,9 +171,6 @@ Atributi:
        
        
        
-![alt text][detailed]
-
-[detailed]: metadata/detailed.PNG
 
 
 
@@ -191,6 +188,8 @@ Prva stavka navigacionog menija predstavlja pregled svih filmova trenutno prisut
 
 **Osnovno filtriranje prikazanih filmova se zadaje iz drop-down menija Actors, Directors i Genres. Izborom nekog glumca, na primer, biće filtriran prikaz filmova tako da sadrži samo filmove koji su u vezi (u graph bazi) sa zadatim glumcem. Ista analogija važi i za filtriranje po režiserima i žanrovima. Moguće je kombinovanje ovih filtera. U primeru je izabran filter po žanru Adventure.**
 
+Poništavanje svih filtera se vrši klikom na x dugme. Sortiranje trenutne selekcije po alfabetnom redosledu naziva se dobija klikom na sort dugme.
+
 ![alt text][filter]
 
 [filter]: metadata/filter.PNG
@@ -204,7 +203,7 @@ Klikom na Add dugme u gornjem meniju otvara se dijalog dodavanja novog filma u k
 
 
 ### Modifikacija filma, ponovno pribavljanje metadapodataka
-Klikom na Modify dugme u gornjem meniju otvara se dijalog promene atrbibuta postojećeg filma iz kolekcije. Na korisniku je sada izbor koje će konkretne atrbute filma menjati, ima na raspolaganju menjanje svih atrbuta konkretnog filma osim samog naziva. Klikom na dugme Refresh metadata se pokreće proces ponovnog pribavljanja meta podataka o filmu. Nakon željenih modifikacija korisnik pritiskom na  dugme Modify menja informacije o izabranom filmu. Ova mogućnost je najsmislenija prilkom promene atributa putanje do samog multimedijalog fajla.
+Klikom na Modify metadata dugme u gornjem meniju otvara se dijalog promene atrbibuta postojećeg filma iz kolekcije. Moguće je promeniti putanju do filma na lokalnom fajlsistemu ili ponovo pribaviti potencijalno promenjene metapodatke filma. Nakon željenih modifikacija korisnik pritiskom na  dugme Modify menja informacije o izabranom filmu. Ova mogućnost je najsmislenija prilkom promene atributa putanje do samog multimedijalog fajla.
 
 ### Brisanje filma
 Klikom na dugme Remove se briše trenutno selektovani film iz kolekcije, pre samog brisanja se proverava izvršenje sa korisnikom uz Message dijalog. Klikom na Yes, Remove film je nepovratno obrisan iz kolekcije filmova.
@@ -212,8 +211,16 @@ Klikom na dugme Remove se briše trenutno selektovani film iz kolekcije, pre sam
 ### Reprodukcija filmova
 Za svaki film koji je prisutan na memorijskom medijumu i pritom je definisan njegov atrbut putanje, prethodno od strane korisnika, prelaskom kursora preko slike filma u osnovnom pregledu javiće se dugme za reprodukciju. Klikom na dugme za reprodukciju prelazi se na stranicu reprodukcije Now Playing..  i momentalno se vrši reprodukcija prethodno selektovanog filma. Korisnik ima mogućnost kontrole reprodukcije, kao i mogućnost Full screen režima.
 
+### Dodavanje više filmova iz foldera
+Klikom na browse dugme u gornjem meniju otvara dijalog izbora foldera. Nakon specifikacije foldera pribavljaju se svi multimedijalni fajlovi iz njega i pravi se lista koja će biti prikazana. Za svaki od elemenata liste postoji izbor pribavljanja metapodataka i dodavanja u kolekciju.
+
+![alt text][browse]
+
+[browse]: metadata/browse.PNG
+
+
 ### Pregled sezona serija
-Druga stavka navigacionog menija predstavlja pregled svih sezona serija trenutno prisutnih u kolekciji, ovaj pregled se bira klikom na ikonicu druge stavke samog navigacionog menija. U centralnom delu se nalazi takozvani Grid pregled sezona u kome su svi prisutne sve sezone serija predstavljeni u vidu njihovih poster slika i naziva koji uključuje ime serije, odnosno serijala i broj same sezone istog. Klikom na neku od serija iz ovog pregleda ona postaje izabrana i sa desne strane se mogu videti osnovne informacije o izabranoj seriji. Osnovne informacije uključuju veću sliku, naziv, godinu, žanr, pisce, mrežu na kojoj je serija reproukovana i poslednji datum reprodukcije. Za stavke sa specificiranim atrbutom putanje se nalazi i informacija o putanji do konkretnog foldera na memorijskom medijumu.
+Druga stavka navigacionog menija predstavlja pregled svih sezona serija trenutno prisutnih u kolekciji, ovaj pregled se bira klikom na ikonicu druge stavke samog navigacionog menija. U centralnom delu se nalazi takozvani Grid pregled sezona u kome su svi prisutne sve sezone serija predstavljeni u vidu njihovih poster slika i naziva koji uključuje ime serije, odnosno serijala i broj same sezone istog. Klikom na neku od serija iz ovog pregleda ona postaje izabrana i sa desne strane se mogu videti osnovne informacije o izabranoj seriji. Osnovne informacije uključuju veću sliku, naziv, godinu, žanr, pisce, mrežu na kojoj je serija reproukovana i slično. Za stavke sa specificiranim atrbutom putanje se nalazi i informacija o putanji do konkretnog foldera na memorijskom medijumu.
 
 ![alt text][series]
 
@@ -228,13 +235,13 @@ Klikom na Add dugme u gornjem meniju otvara se dijalog dodavanja nove sezone u k
 [addSeason]: metadata/addSeason.PNG
 
 ### Modifikacija sezone, ponovno pribavljanje metadapodataka
-Klikom na Modify dugme u gornjem meniju otvara se dijalog promene atrbibuta postojeće sezone iz kolekcije. Na korisniku je sada izbor koje će konkretne atrbute sezone menjati, ima na raspolaganju menjanje svih atrbuta konkretne sezone osim samog naziva, koji uključuje i specifikaciju broja sezone. Klikom na dugme Find metadata se pokreće proces ponovnog pribavljanja meta podataka o sezoni. Nakon željenih modifikacija korisnik pritiskom na  dugme Modify menja informacije o izabranoj sezoni. Ova mogućnost je najsmislenija prilkom promene atributa putanje do samog foldera u kome se nalaze epizode sezone.
+Klikom na Modify dugme u gornjem meniju otvara se dijalog promene atrbibuta postojeće sezone iz kolekcije. Moguće je promeniti putanju do foldera na lokalnom fajlsistemu ili ponovo pribaviti potencijalno promenjene metapodatke sezone. Nakon željenih modifikacija korisnik pritiskom na  dugme Modify menja informacije o izabranoj sezoni.
 
 ### Brisanje sezone
 Klikom na dugme Remove se briše trenutno selektovana sezona iz kolekcije, pre samog brisanja se proverava izvršenje sa korisnikom uz Message dijalog. Klikom na Yes, Remove sezona je nepovratno obrisana iz kolekcije.
 
 ### Preporuka filmova i dodavanje izabranih
-Treća stavka navigacinog menija predstavlja pregled preporučenih filmova koji se instantno mogu dodati u kolekciju. Svako pribavljanje je različito i dobija se kao rezultat lista od dvadeset filmova koji su preporučeni korisniku po trenutnom stanju njegove kolekcije. Sam proces pribavljanje se počinje klikom na dugme Refresh u gornjem meniju, nakon pribavljanje kroz listu korisnik prolazi dugmićima levo i desno. Selekcijom Add to collection trenutno izabrani film iz preporučene liste će biti dodat u kolekciju. Nakon selekcije svih željenih filmova potrebno je klikunuti na dugme Add selected i svi selektovani filmovi će biti pridodati kolekciji.
+Treća stavka navigacinog menija predstavlja pregled preporučenih filmova koji se instantno mogu dodati u kolekciju. Svako pribavljanje je različito i dobija se kao rezultat lista od deset filmova koji su preporučeni korisniku po trenutnom stanju njegove kolekcije. Sam proces pribavljanje se počinje klikom na dugme Refresh u gornjem meniju, nakon pribavljanje kroz listu korisnik prolazi dugmićima levo i desno. Selekcijom Add to collection trenutno izabrani film iz preporučene liste će biti dodat u kolekciju. Nakon selekcije svih željenih filmova potrebno je klikunuti na dugme Add selected i svi selektovani filmovi će biti pridodati kolekciji.
 
 ![alt text][recommend]
 
