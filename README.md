@@ -175,8 +175,13 @@ Atributi:
                .ReturnDistinct(movie => movie.As<NeoMovie>())
                .Results;`
        
-       
-       
+
+Ovaj konkretan Cypher upit se koristi na **DetailedView** stranici aplikacije. Ovo uključuje prikazivanje svih dostupnih meta podataka o filmu u desnom delu, listu filmova u središnjem i filtriranje liste u levom. Filtriranje uključuje izbor ograničenja godine filma, na isti način ograničenje trajanja, izbor žanrova koji treba da odgovaraju svakom filmu u listi, izbor režisera i na kraju izbor glumaca. Svi ovi parametri zajedno odredjuju koji će film biti prikazan u filtriranoj listi. Samo oni filmovi koji odgovaraju svim parametrima filtrirana će biti uvršćeni u rezultujuću listu. Filtriranje se vrši pozivom `ObservableCollection<Movie> _readByMultiple`.
+
+![alt text][details]
+
+[details]: metadata/detailed.PNG
+
 
 
 
