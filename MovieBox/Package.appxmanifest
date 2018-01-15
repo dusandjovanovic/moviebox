@@ -28,16 +28,9 @@
       </uap:VisualElements>
       <Extensions>
         <uap:Extension Category="windows.fileTypeAssociation">
-          <uap:FileTypeAssociation Name="mp4">
+          <uap:FileTypeAssociation Name="avi">
             <uap:SupportedFileTypes>
-              <uap:FileType>.mp4</uap:FileType>
-            </uap:SupportedFileTypes>
-          </uap:FileTypeAssociation>
-        </uap:Extension>
-        <uap:Extension Category="windows.fileTypeAssociation">
-          <uap:FileTypeAssociation Name="m4v">
-            <uap:SupportedFileTypes>
-              <uap:FileType>.m4v</uap:FileType>
+              <uap:FileType>.avi</uap:FileType>
             </uap:SupportedFileTypes>
           </uap:FileTypeAssociation>
         </uap:Extension>
@@ -49,15 +42,23 @@
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
-          <uap:FileTypeAssociation Name="avi">
+          <uap:FileTypeAssociation Name="m4v">
             <uap:SupportedFileTypes>
-              <uap:FileType>.avi</uap:FileType>
+              <uap:FileType>.m4v</uap:FileType>
+            </uap:SupportedFileTypes>
+          </uap:FileTypeAssociation>
+        </uap:Extension>
+        <uap:Extension Category="windows.fileTypeAssociation">
+          <uap:FileTypeAssociation Name="mp4">
+            <uap:SupportedFileTypes>
+              <uap:FileType>.mp4</uap:FileType>
             </uap:SupportedFileTypes>
           </uap:FileTypeAssociation>
         </uap:Extension>
       </Extensions>
       <uap:ApplicationContentUriRules>
         <uap:Rule Match="http://localhost:7474/" Type="include" WindowsRuntimeAccess="all" />
+        <uap:Rule Match="http://localhost" Type="include" WindowsRuntimeAccess="all" />
       </uap:ApplicationContentUriRules>
     </Application>
   </Applications>

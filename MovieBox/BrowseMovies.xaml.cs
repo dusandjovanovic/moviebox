@@ -48,10 +48,10 @@ namespace MovieBox
             this.initializeFiles();
         }
 
-        private async void AddButton_Click(object sender, RoutedEventArgs e)
+        private void AddButton_Click(object sender, RoutedEventArgs e)
         {
             NeoSingleton._connect();
-            await NeoSingleton._addMovieAsync(addMovie);
+            NeoSingleton._addMovie(addMovie);
             MovieBox.NeoModels.Movie movie = (MovieBox.NeoModels.Movie)MoviesList.SelectedItem;
             movieList.Instance.addMovie(addMovie);
             moviesPath.Remove(movie);

@@ -32,11 +32,11 @@ namespace MovieBox.NeoController
             }
         }
 
-        public static async Task _addMovieAsync(Movie movie)
+        public static void _addMovie(Movie movie)
         {
             NeoMovie newMovie = new NeoMovie(movie);
 
-            await _instance.Cypher
+            _instance.Cypher
                 .Merge("(movie:Movie { Id: {id} })")
                 .OnCreate()
                 .Set("movie = {newMovie}")
@@ -45,12 +45,12 @@ namespace MovieBox.NeoController
                     id = movie.Id,
                     newMovie
                 })
-                .ExecuteWithoutResultsAsync();
+                .ExecuteWithoutResults();
 
 
             foreach (Actor newActor in movie.Actors)
             {
-                await _instance.Cypher
+                _instance.Cypher
                      .Merge("(actor:Actor { PersonId: {personId} })")
                      .OnCreate()
                      .Set("actor = {newActor}")
@@ -59,19 +59,19 @@ namespace MovieBox.NeoController
                          personId = newActor.PersonId,
                          newActor
                      })
-                 .ExecuteWithoutResultsAsync();
+                 .ExecuteWithoutResults();
 
-                await _instance.Cypher
+                _instance.Cypher
                     .Match("(foundMovie:Movie)", "(foundActor:Actor)")
                     .Where((NeoMovie foundMovie) => foundMovie.Id == movie.Id)
                     .AndWhere((Actor foundActor) => foundActor.PersonId == newActor.PersonId)
                     .CreateUnique("(foundActor)-[:ACTS_IN]->(foundMovie)")
-                    .ExecuteWithoutResultsAsync();
+                    .ExecuteWithoutResults();
             }
 
             foreach (Genre newGenre in movie.Genres)
             {
-                await _instance.Cypher
+                _instance.Cypher
                      .Merge("(genre:Genre { Id: {genreId} })")
                      .OnCreate()
                      .Set("genre = {newGenre}")
@@ -80,19 +80,19 @@ namespace MovieBox.NeoController
                          genreId = newGenre.Id,
                          newGenre
                      })
-                 .ExecuteWithoutResultsAsync();
+                 .ExecuteWithoutResults();
 
-                await _instance.Cypher
+                _instance.Cypher
                     .Match("(foundMovie:Movie)", "(foundGenre:Genre)")
                     .Where((NeoMovie foundMovie) => foundMovie.Id == movie.Id)
                     .AndWhere((Genre foundGenre) => foundGenre.Id == newGenre.Id)
                     .CreateUnique("(foundMovie)-[:IS_GENRE]->(foundGenre)")
-                    .ExecuteWithoutResultsAsync();
+                    .ExecuteWithoutResults();
             }
 
             foreach (Director newDirector in movie.Directors)
             {
-                await _instance.Cypher
+                _instance.Cypher
                      .Merge("(director:Director { PersonId: {personId} })")
                      .OnCreate()
                      .Set("director = {newDirector}")
@@ -101,19 +101,19 @@ namespace MovieBox.NeoController
                          personId = newDirector.PersonId,
                          newDirector
                      })
-                 .ExecuteWithoutResultsAsync();
+                 .ExecuteWithoutResults();
 
-                await _instance.Cypher
+                _instance.Cypher
                     .Match("(foundMovie:Movie)", "(foundDirector:Director)")
                     .Where((NeoMovie foundMovie) => foundMovie.Id == movie.Id)
                     .AndWhere((Actor foundDirector) => foundDirector.PersonId == newDirector.PersonId)
                     .CreateUnique("(foundDirector)-[:DIRECTED]->(foundMovie)")
-                    .ExecuteWithoutResultsAsync();
+                    .ExecuteWithoutResults();
             }
 
             foreach (Writer newWriter in movie.Writers)
             {
-                await _instance.Cypher
+                _instance.Cypher
                      .Merge("(writer:Writer { PersonId: {personId} })")
                      .OnCreate()
                      .Set("writer = {newWriter}")
@@ -122,42 +122,42 @@ namespace MovieBox.NeoController
                          personId = newWriter.PersonId,
                          newWriter
                      })
-                 .ExecuteWithoutResultsAsync();
+                 .ExecuteWithoutResults();
 
-                await _instance.Cypher
+                _instance.Cypher
                     .Match("(foundMovie:Movie)", "(foundWriter:Writer)")
                     .Where((NeoMovie foundMovie) => foundMovie.Id == movie.Id)
                     .AndWhere((Writer foundWriter) => foundWriter.PersonId == newWriter.PersonId)
                     .CreateUnique("(foundWriter)-[:WROTE]->(foundMovie)")
-                    .ExecuteWithoutResultsAsync();
+                    .ExecuteWithoutResults();
             }
         }
 
-        public static async Task _removeMovieAsync(Movie todelete)
+        public static void _removeMovie(Movie todelete)
         {
-            await _instance.Cypher
+            _instance.Cypher
                 .OptionalMatch("(movie:Movie)-[r]->()")
                 .Where((NeoMovie movie) => movie.Id == todelete.Id)
                 .DetachDelete("r, movie")
-                .ExecuteWithoutResultsAsync();
+                .ExecuteWithoutResults();
 
-            await _instance.Cypher
+            _instance.Cypher
                 .OptionalMatch("(movie:Movie)<-[r]-()")
                 .Where((NeoMovie movie) => movie.Id == todelete.Id)
                 .DetachDelete("r, movie")
-                .ExecuteWithoutResultsAsync();
+                .ExecuteWithoutResults();
 
-            await _instance.Cypher
+            _instance.Cypher
                 .Match("(orphanNode)")
                 .Where("not (orphanNode)-[]-()")
                 .Delete("orphanNode")
-                .ExecuteWithoutResultsAsync();
+                .ExecuteWithoutResults();
 
-            await _instance.Cypher
+            _instance.Cypher
                .Match("(movie:Movie)")
                .Where((NeoMovie movie) => movie.Id == todelete.Id)
                .Delete("movie")
-               .ExecuteWithoutResultsAsync();
+               .ExecuteWithoutResults();
         }
 
         public static void _modifyMovie(Movie tomodify)

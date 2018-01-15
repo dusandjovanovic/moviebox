@@ -140,15 +140,15 @@ namespace MovieBox
             Movie selected = (Movie)MovieGridView.SelectedItem;
 
             var messageDialog = new MessageDialog("Are you sure you want to remove " + selected.Title + " from your collection?");
-            messageDialog.Commands.Add(new UICommand("Yes, Remove", new UICommandInvokedHandler(this.CommandInvokedHandlerAsync)));
-            messageDialog.Commands.Add(new UICommand("Cancel", new UICommandInvokedHandler(this.CommandInvokedHandlerAsync)));
+            messageDialog.Commands.Add(new UICommand("Yes, Remove", new UICommandInvokedHandler(this.CommandInvokedHandler)));
+            messageDialog.Commands.Add(new UICommand("Cancel", new UICommandInvokedHandler(this.CommandInvokedHandler)));
             messageDialog.DefaultCommandIndex = 0;
             messageDialog.CancelCommandIndex = 1;
 
             await messageDialog.ShowAsync();
         }
 
-        private async void CommandInvokedHandlerAsync(IUICommand command)
+        private void CommandInvokedHandler(IUICommand command)
         {
             Movie selected = (Movie)MovieGridView.SelectedItem;
 
@@ -158,7 +158,7 @@ namespace MovieBox
             {
                 movieList.Instance.deleteMovie(selected.Id);
                 NeoSingleton._connect();
-                await NeoSingleton._removeMovieAsync(selected);
+                NeoSingleton._removeMovie(selected);
             }
 
             GenresComboBox.SelectedIndex = -1;

@@ -51,14 +51,14 @@ namespace MovieBox
             txtPath.Text = path;
         }
 
-        private async void ContentDialog_PrimaryButtonClickAsync(ContentDialog sender, ContentDialogButtonClickEventArgs args)
+        private void ContentDialog_PrimaryButtonClickAsync(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
             if (!btnPath.IsEnabled)
                 return;
 
             movieList.Instance.addMovie(addMovie);
             NeoSingleton._connect();
-            await NeoSingleton._addMovieAsync(addMovie);
+            NeoSingleton._addMovie(addMovie);
             return;
         }
 

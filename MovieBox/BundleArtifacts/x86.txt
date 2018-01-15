@@ -1,2 +1,6 @@
-MainPackage=C:\Users\dusan\Desktop\MovieBox\MovieBox\bin\x86\Debug\MovieBox_1.0.1.0_x86_Debug.appx
-SymbolPackage=C:\Users\dusan\Desktop\MovieBox\MovieBox_1.0.1.0_Debug_Test\MovieBox_1.0.1.0_x86_Debug.appxsym
+MainPackage=C:\Users\dusan\Desktop\MovieBox\MovieBox\bin\x86\Release\MovieBox_1.0.1.0_x86.appx
+SymbolPackage=C:\Users\dusan\Desktop\MovieBox\MovieBox_1.0.1.0_Test\MovieBox_1.0.1.0_x86.appxsym
+ResourcePack=C:\Users\dusan\Desktop\MovieBox\MovieBox\bin\x86\Release\MovieBox_1.0.1.0_scale-100.appx
+ResourcePack=C:\Users\dusan\Desktop\MovieBox\MovieBox\bin\x86\Release\MovieBox_1.0.1.0_scale-125.appx
+ResourcePack=C:\Users\dusan\Desktop\MovieBox\MovieBox\bin\x86\Release\MovieBox_1.0.1.0_scale-150.appx
+ResourcePack=C:\Users\dusan\Desktop\MovieBox\MovieBox\bin\x86\Release\MovieBox_1.0.1.0_scale-400.appx

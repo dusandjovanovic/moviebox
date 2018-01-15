@@ -106,9 +106,9 @@ Pristupanje bazi podataka ostvaruje se kroz statičku klasu NeoSingleton u kojoj
 
 Metode:
 
-`_addMovieAsync(Movie movie)` za dodavanje novog entiteta filma u bazu podataka, kao i dodavanje svih elemenata sa kojima je u vezi.
+`_addMovie(Movie movie)` za dodavanje novog entiteta filma u bazu podataka, kao i dodavanje svih elemenata sa kojima je u vezi.
 
-`_removeMovieAsync(Movie todelete)` za brisanje postojećeg filma i svih veza.
+`_removeMovie(Movie todelete)` za brisanje postojećeg filma i svih veza.
 
 `_modifyMovie(Movie tomodify)` za promenu atributa postojećeg filma.
 

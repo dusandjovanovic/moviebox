@@ -54,7 +54,7 @@ namespace MovieBox
             control.IsTapEnabled = true;
         }
 
-        private async void AddToButton_Click(object sender, RoutedEventArgs e)
+        private void AddToButton_Click(object sender, RoutedEventArgs e)
         {
             int index = 0;
             foreach (NeoModels.Movie movie in Suggested)
@@ -63,7 +63,7 @@ namespace MovieBox
                 {
                     movieList.Instance.addMovie(movie);
                     NeoSingleton._connect();
-                    await NeoSingleton._addMovieAsync(movie);
+                    NeoSingleton._addMovie(movie);
                 }
                 index++;
             }
