@@ -1,7 +1,7 @@
 # moviebox
 Universal Windows Application for getting and storing movie and series metadata. Neo4j graph database integration.
 
-MovieBox  je aplikacija koji omogućava organizovanje i lako održavanje kolekcije filmova. Održavanje kolekcije podrazumeva dodavanje, modifikaciju i brisanje filmova. Pored filmova postoji i pregled sezona serija. MovieBox omogućava nalaženje odredjenog filma iz kolekcije i reprodukciju sadržaja ukoliko je taj konkretan film prisutan na fajlsistemu korisnika. Pored održavanje biblioteke MovieBox pruža i pribavljanje preporučenih filmova, formiranih na osnovu trenutnog sadržaja biblioteke.
+MovieBox  je aplikacija koji omogućava organizovanje i lako održavanje kolekcije filmova. Održavanje kolekcije podrazumeva dodavanje, modifikaciju i brisanje filmova. Pored filmova postoji i pregled sezona serija. MovieBox omogućava nalaženje odredjenog filma iz kolekcije i reprodukciju sadržaja ukoliko je taj konkretan film prisutan na fajlsistemu korisnika. Pored održavanja biblioteke MovieBox pruža i pribavljanje preporučenih filmova, formiranih na osnovu trenutnog sadržaja biblioteke.
 
 
 ![alt text][main]
@@ -129,7 +129,7 @@ Metode:
 
 `_readTVShows()` za dovijanje svih serija iz baze, kao elemenata koji su u vezi sa njima.
 
-`_addTvShow(TVShow show)` za dodavanje novog entiteta serije.
+`_addTVShow(TVShow show)` za dodavanje novog entiteta serije.
 
 `_addSeason(Season newSeason, TVShow show)` za dodavanje sezone seriji koja je već prisutna u bazi.
 
@@ -173,10 +173,10 @@ Atributi:
                    directorsList
                })
                .ReturnDistinct(movie => movie.As<NeoMovie>())
-               .Results;`
+               .Results;
        
 
-Ovaj konkretan Cypher upit se koristi na **DetailedView** stranici aplikacije. Ovo uključuje prikazivanje svih dostupnih meta podataka o filmu u desnom delu, listu filmova u središnjem i filtriranje liste u levom. Filtriranje uključuje izbor ograničenja godine filma, na isti način ograničenje trajanja, izbor žanrova koji treba da odgovaraju svakom filmu u listi, izbor režisera i na kraju izbor glumaca. Svi ovi parametri zajedno odredjuju koji će film biti prikazan u filtriranoj listi. Samo oni filmovi koji odgovaraju svim parametrima filtrirana će biti uvršćeni u rezultujuću listu. Filtriranje se vrši pozivom `ObservableCollection<Movie> _readByMultiple`.
+Ovaj konkretan Cypher upit se koristi na **DetailedView** stranici aplikacije. Ovo uključuje prikazivanje svih dostupnih meta podataka o filmu u desnom delu, listu filmova u središnjem i filtriranje liste u levom delu stranice. Filtriranje uključuje izbor ograničenja godine filma, na isti način ograničenje trajanja, izbor žanrova koji treba da odgovaraju svakom filmu u listi, izbor režisera i na kraju izbor glumaca. Svi ovi parametri zajedno odredjuju koji će film biti prikazan u filtriranoj listi. Samo oni filmovi koji odgovaraju svim parametrima filtrirana će biti uvršćeni u rezultujuću listu. Filtriranje se vrši pozivom `ObservableCollection<Movie> _readByMultiple`.
 
 ![alt text][details]
 
